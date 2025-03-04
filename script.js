@@ -50,8 +50,7 @@ function displayItems() {
                     <p>${item.description}</p>
                     <small><strong>Location:</strong> ${item.location}</small>
                     <div class="actions">
-                        ${item.status === 'lost' ? `<button class="found-btn" onclick="showContactDetails('${item.email}', '${item.phone}')">Mark as Found</button>` : ''}
-                        ${item.status === 'found' ? `<button class="contact-btn" onclick="showContactDetails('${item.email}', '${item.phone}')">Contact Finder</button>` : ''}
+                        <button class="contact-btn" onclick="showContactDetails('${item.email}', '${item.phone}')">Contact</button>
                         <button class="delete-btn" onclick="deleteItem(${index})">Delete</button>
                     </div>
                 </div>
