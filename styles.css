@@ -1,10 +1,11 @@
 /* General Styles */
 :root {
-    --primary: #007BFF;
+    --primary: #7C4DFF; /* Purple */
+    --header: #512DA8; /* Darker Purple */
     --secondary: #6C757D;
     --accent-green: #28A745;
     --accent-red: #DC3545;
-    --background: #F8F9FA;
+    --background: linear-gradient(135deg, #7C4DFF, #512DA8); /* Purple gradient */
     --text-dark: #333333;
     --text-light: #FFFFFF;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -14,9 +15,12 @@ body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #F8F9FA, #E9ECEF);
+    background: var(--background);
     color: var(--text-dark);
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
@@ -27,7 +31,7 @@ body {
 
 /* Navigation Bar */
 nav {
-    background: var(--primary);
+    background: var(--header);
     padding: 1rem 0;
     box-shadow: var(--shadow);
     position: sticky;
@@ -64,12 +68,12 @@ nav .nav-links .active {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(0, 86, 179, 0.9)), url('hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    color: var(--text-light);
-    padding: 5rem 0;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    color: var(--text-light);
 }
 
 .hero h1 {
@@ -106,7 +110,7 @@ nav .nav-links .active {
 
 .report-section h2 {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     color: var(--text-dark);
 }
 
@@ -117,6 +121,44 @@ nav .nav-links .active {
     padding: 2rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-dark);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+.image-preview {
+    max-width: 100%;
+    height: 200px; /* Fixed height for image preview */
+    object-fit: cover; /* Ensures the image scales properly */
+    border-radius: 5px;
+    margin-top: 1rem;
+    display: none;
 }
 
 /* Browse Section */
@@ -159,11 +201,27 @@ nav .nav-links .active {
     transform: translateY(-5px);
 }
 
-/* Footer */
-footer {
-    background: linear-gradient(135deg, var(--primary), #0056b3);
+/* Pop-up Styles */
+.popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
     color: var(--text-light);
-    text-align: center;
-    padding: 1rem 0;
-    margin-top: 2rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+    display: none;
+    z-index: 1000;
+}
+
+.popup.show {
+    display: block;
+    animation: fadeInOut 3s ease-in-out;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    10%, 90% { opacity: 1; }
 }

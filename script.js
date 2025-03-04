@@ -1,4 +1,4 @@
-// Shared Data (Simulate a database using localStorage)
+// Shared Data (Stored in localStorage)
 let items = JSON.parse(localStorage.getItem('items')) || [];
 
 // Report Form Submission
@@ -10,14 +10,20 @@ document.getElementById('reportForm')?.addEventListener('submit', function (even
     const description = document.getElementById('description').value;
     const location = document.getElementById('location').value;
     const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
     const image = document.getElementById('imagePreview').src || null;
 
-    const newItem = { status, itemName, description, location, email, image };
+    const newItem = { status, itemName, description, location, email, phone, image };
     items.push(newItem);
-    localStorage.setItem('items', JSON.stringify(items));
+    localStorage.setItem('items', JSON.stringify(items)); // Save to localStorage
 
-    alert('Item reported successfully!');
-    window.location.href = 'browse.html'; // Redirect to Browse page
+    // Show success pop-up
+    const successPopup = document.getElementById('successPopup');
+    successPopup.classList.add('show');
+    setTimeout(() => successPopup.classList.remove('show'), 3000);
+
+    // Redirect to Browse page
+    setTimeout(() => window.location.href = 'browse.html', 1000);
 });
 
 // Image Upload Preview
@@ -44,8 +50,7 @@ function displayItems() {
                     <p>${item.description}</p>
                     <small><strong>Location:</strong> ${item.location}</small>
                     <div class="actions">
-                        ${item.status === 'lost' ? `<button class="found-btn" onclick="markAsFound(${index})">Mark as Found</button>` : ''}
-                        <button class="contact-btn" onclick="contactOwner('${item.email}')">Contact</button>
+                        ${item.status === 'lost' ? `<button class="found-btn" onclick="showContactDetails('${item.email}', '${item.phone}')">Found</button>` : ''}
                         <button class="delete-btn" onclick="deleteItem(${index})">Delete</button>
                     </div>
                 </div>
@@ -55,23 +60,20 @@ function displayItems() {
     }
 }
 
-// Mark Item as Found
-function markAsFound(index) {
-    items[index].status = 'found';
-    localStorage.setItem('items', JSON.stringify(items));
-    displayItems();
+// Show Contact Details
+function showContactDetails(email, phone) {
+    const contactPopup = document.getElementById('contactPopup');
+    const contactDetails = document.getElementById('contactDetails');
+    contactDetails.innerHTML = `Contact Details:<br>Email: ${email}<br>Phone: ${phone}`;
+    contactPopup.classList.add('show');
+    setTimeout(() => contactPopup.classList.remove('show'), 5000);
 }
 
 // Delete Item
 function deleteItem(index) {
     items.splice(index, 1);
-    localStorage.setItem('items', JSON.stringify(items));
+    localStorage.setItem('items', JSON.stringify(items)); // Update localStorage
     displayItems();
-}
-
-// Contact Owner
-function contactOwner(email) {
-    window.location.href = `mailto:${email}`;
 }
 
 // Search Items
