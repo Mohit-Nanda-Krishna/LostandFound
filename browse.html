@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Items - Lost & Found Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">Lost & Found</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="report.html">Report</a>
+                <a href="browse.html" class="active">Browse</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Browse Section -->
+    <section class="browse-section">
+        <div class="container">
+            <h2>Browse Reported Items</h2>
+            <input type="text" id="search" placeholder="Search items..." onkeyup="searchItems()">
+            <div id="items-list"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Lost & Found Portal. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
