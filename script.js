@@ -10,7 +10,7 @@ document.getElementById('reportForm')?.addEventListener('submit', function (even
     const description = document.getElementById('description').value;
     const location = document.getElementById('location').value;
     const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
+    const phone = document.getElementById('phone').value || 'Not provided'; // Make phone number optional
     const image = document.getElementById('imagePreview').src || null;
 
     const newItem = { status, itemName, description, location, email, phone, image };
@@ -50,7 +50,8 @@ function displayItems() {
                     <p>${item.description}</p>
                     <small><strong>Location:</strong> ${item.location}</small>
                     <div class="actions">
-                        ${item.status === 'lost' ? `<button class="found-btn" onclick="showContactDetails('${item.email}', '${item.phone}')">Found</button>` : ''}
+                        ${item.status === 'lost' ? `<button class="found-btn" onclick="showContactDetails('${item.email}', '${item.phone}')">Mark as Found</button>` : ''}
+                        ${item.status === 'found' ? `<button class="contact-btn" onclick="showContactDetails('${item.email}', '${item.phone}')">Contact Finder</button>` : ''}
                         <button class="delete-btn" onclick="deleteItem(${index})">Delete</button>
                     </div>
                 </div>
