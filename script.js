@@ -31,10 +31,10 @@ function previewImage(event) {
     const reader = new FileReader();
     const preview = document.getElementById('imagePreview');
     reader.onload = function () {
-        preview.src = reader.result;
+        preview.src = reader.result; // Set the image preview source to the Base64 string
         preview.style.display = 'block';
     };
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(event.target.files[0]); // Convert the image to a Base64 string
 }
 
 // Display Items on Browse Page
